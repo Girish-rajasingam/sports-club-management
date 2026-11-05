@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>Dashboard</h2>
+<div class="cards">
+  {% for label, value in stats.items() %}<div class="card"><b>{{ value }}</b>{{ label }}</div>{% endfor %}
+</div>
+<h3>Enrollments per Sport</h3>
+<table>
+  <tr><th>Sport</th><th>Members enrolled</th></tr>
+  {% for s in per_sport %}<tr><td>{{ s.name }}</td><td>{{ s.total }}</td></tr>{% endfor %}
+</table>
+{% endblock %}

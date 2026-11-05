@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>Pending Fees Report</h2>
+<form method="get" class="bar">
+  <select name="month" style="max-width:200px" onchange="this.form.submit()">
+    {% for m in months %}<option {{ 'selected' if m == month }}>{{ m }}</option>{% endfor %}
+  </select>
+  <noscript><button class="btn">Show</button></noscript>
+</form>
+<div class="cards"><div class="card"><b>₹{{ total }}</b>Total pending for {{ month }}</div></div>
+<table>
+  <tr><th>Member</th><th>Phone</th><th>Fee Due (₹)</th><th>Paid (₹)</th><th>Pending (₹)</th></tr>
+  {% for r in rows %}
+  <tr><td>{{ r.name }}</td><td>{{ r.phone or '-' }}</td><td>{{ r.due }}</td><td>{{ r.paid }}</td><td><b>{{ r.pending }}</b></td></tr>
+  {% else %}<tr><td colspan="5">No pending fees for {{ month }}. 🎉</td></tr>{% endfor %}
+</table>
+<p style="color:#666;font-size:14px">Fee due = total monthly fee of all sports a member is enrolled in. Pending = due minus payments recorded for that month.</p>
+{% endblock %}

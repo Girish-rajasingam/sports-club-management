@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sports Club Management</title>
+<style>
+  body{font-family:Segoe UI,Arial,sans-serif;margin:0;background:#f4f6f8;color:#222}
+  nav{background:#1b4332;padding:12px 24px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  nav a{color:#fff;text-decoration:none}
+  nav .brand{font-weight:700;font-size:18px;margin-right:16px}
+  main{max-width:900px;margin:24px auto;padding:0 16px}
+  h2{margin-top:0}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #e5e8eb}
+  th{background:#d8f3dc}
+  .btn{background:#2d6a4f;color:#fff;border:0;padding:7px 14px;border-radius:5px;text-decoration:none;cursor:pointer;font-size:14px}
+  .btn.red{background:#c0392b}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:24px}
+  .card{background:#fff;padding:18px;border-radius:8px;box-shadow:0 1px 3px #0001}
+  .card b{display:block;font-size:26px;color:#2d6a4f}
+  label{display:block;margin:12px 0 4px}
+  input,select{width:100%;padding:8px;border:1px solid #bbb;border-radius:5px;box-sizing:border-box}
+  .bar{display:flex;gap:10px;margin-bottom:14px}
+  form.inline{display:inline}
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="/">🏅 Sports Club</a>
+  {% for key, ent in entities.items() %}<a href="/{{ key }}">{{ ent.title }}</a>{% endfor %}<a href="/pending">Pending Fees</a>
+</nav>
+<main>{% block body %}{% endblock %}</main>
+</body>
+</html>

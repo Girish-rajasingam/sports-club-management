@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>{{ 'Edit' if row else 'Add' }} – {{ e.title }}</h2>
+<form method="post">
+  {% for col, label, typ in e.fields %}
+    <label>{{ label }}</label>
+    {% if typ.startswith('fk:') %}
+      <select name="{{ col }}" required>
+        {% for o in opts[col] %}<option value="{{ o.id }}" {{ 'selected' if row[col] == o.id }}>{{ o.label }}</option>{% endfor %}
+      </select>
+    {% elif typ.startswith('select:') %}
+      <select name="{{ col }}">
+        {% for o in typ.split(':')[1].split(',') %}<option {{ 'selected' if row[col] == o }}>{{ o }}</option>{% endfor %}
+      </select>
+    {% else %}
+      <input name="{{ col }}" type="{{ typ }}" step="any" value="{{ row[col] if row[col] is not none else '' }}" required>
+    {% endif %}
+  {% endfor %}
+  <p><button class="btn">Save</button> <a class="btn red" href="/{{ table }}">Cancel</a></p>
+</form>
+{% endblock %}
